@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt - SAUFSHOP</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    <style>
+    body {
+        background: url('../img/Kontakt.jpg') center/cover fixed !important;
+    }
+    </style>
+    
+    <header>
+        <div class="header-container">
+            <div class="header-top">
+                <div class="logo"><a href="index.html" style="text-decoration: none; color: var(--gold);">🍷 SAUFSHOP</a></div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" id="headerSearch" placeholder="Wein suchen..." />
+                        <button onclick="redirectToShop()">🔍</button>
+                    </div>
+                    <a href="shop.html" class="cart-badge" style="text-decoration: none; cursor: pointer;">
+                        🛒 <span id="cartCount">0</span>
+                    </a>
+                </div>
+            </div>
+            
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="about.html">Über uns</a>
+                <a href="contact.html" class="active">Kontakt</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 style="text-align: center; margin-bottom: 3rem;">Kontakt</h1>
+        
+        <div class="contact-container">
+            <div class="form-group">
+                <label>Name <span class="required">*</span></label>
+                <input type="text" id="contactName" placeholder="Dein vollständiger Name" />
+            </div>
+            
+            <div class="form-group">
+                <label>E-Mail Adresse <span class="required">*</span></label>
+                <input type="email" id="contactEmail" placeholder="deine.email@beispiel.de" />
+            </div>
+            
+            <div class="form-group">
+                <label>Art der Anfrage <span class="required">*</span></label>
+                <select id="contactType">
+                    <option value="">-- Bitte wählen --</option>
+                    <option value="frage">Allgemeine Frage</option>
+                    <option value="beschwerde">Beschwerde</option>
+                    <option value="zusammenarbeit">Zusammenarbeit / Partnerschaft</option>
+                    <option value="newsletter">Newsletter Anmeldung</option>
+                    <option value="wine_recommendation">Wein-Empfehlung</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Betreff <span class="required">*</span></label>
+                <input type="text" id="contactSubject" placeholder="Dein Anliegen kurz zusammenfassen" />
+            </div>
+            
+            <div class="form-group">
+                <label>Dein Anliegen <span class="required">*</span></label>
+                <textarea id="contactMessage" placeholder="Beschreibe hier dein Anliegen ausführlich..."></textarea>
+            </div>
+            
+            <button class="submit-btn" onclick="submitContact()">NACHRICHT SENDEN</button>
+            
+            <p class="form-note">* Pflichtfelder</p>
+        </div>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon">✉️</div>
+            <h2>Nachricht erhalten!</h2>
+            <p>Danke für deine Nachricht!</p>
+            <div id="successDetails"></div>
+            <button class="modal-btn" onclick="closeModal()">Zurück zur Startseite</button>
+        </div>
+    </div>
+
+    <script src="../assets/js/script.js"></script>
+    <script>
+        function submitContact() {
+            const name = document.getElementById('contactName').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            const type = document.getElementById('contactType').value;
+            const subject = document.getElementById('contactSubject').value.trim();
+            const message = document.getElementById('contactMessage').value.trim();
+
+            // Validation
+            if (!name || !email || !type || !subject || !message) {
+                alert('Bitte alle Pflichtfelder ausfüllen!');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Bitte eine gültige E-Mail eingeben!');
+                return;
+            }
+
+            // Log message (in real app, send to backend)
+            console.log('Nachricht eingegangen:', {
+                name,
+                email,
+                type,
+                subject,
+                message,
+                timestamp: new Date().toLocaleString()
+            });
+
+            // Show success modal
+            const typeMap = {
+                'frage': 'Allgemeine Frage',
+                'beschwerde': 'Beschwerde',
+                'zusammenarbeit': 'Zusammenarbeit / Partnerschaft',
+                'newsletter': 'Newsletter Anmeldung',
+                'wine_recommendation': 'Wein-Empfehlung'
+            };
+
+            document.getElementById('successDetails').innerHTML = `
+                <div class="confirmation-details">
+                    <div class="detail-row">
+                        <span>Name:</span>
+                        <span>${name}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>E-Mail:</span>
+                        <span>${email}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Anfrage-Typ:</span>
+                        <span>${typeMap[type]}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span>Betreff:</span>
+                        <span>${subject}</span>
+                    </div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">
+                    Wir melden uns bald unter der angegebenen E-Mail-Adresse. 
+                    Dank deiner Kontaktaufnahme!
+                </p>
+            `;
+
+            document.getElementById('successModal').classList.add('active');
+
+            // Reset form
+            document.getElementById('contactName').value = '';
+            document.getElementById('contactEmail').value = '';
+            document.getElementById('contactType').value = '';
+            document.getElementById('contactSubject').value = '';
+            document.getElementById('contactMessage').value = '';
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('active');
+            window.location.href = 'index.html';
+        }
+
+        function redirectToShop() {
+            const query = document.getElementById('headerSearch').value;
+            if (query) {
+                window.location.href = 'shop.html?search=' + encodeURIComponent(query);
+            } else {
+                window.location.href = 'shop.html';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCart();
+        });
+    </script>
+</body>
+</html>

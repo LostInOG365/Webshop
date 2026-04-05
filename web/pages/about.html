@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Über uns - SAUFSHOP</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="header-top">
+                <div class="logo"><a href="index.html" style="text-decoration: none; color: var(--gold);">🍷 SAUFSHOP</a></div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" id="headerSearch" placeholder="Wein suchen..." />
+                        <button onclick="redirectToShop()">🔍</button>
+                    </div>
+                    <a href="shop.html" class="cart-badge" style="text-decoration: none; cursor: pointer;">
+                        🛒 <span id="cartCount">0</span>
+                    </a>
+                </div>
+            </div>
+            
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="about.html" class="active">Über uns</a>
+                <a href="contact.html">Kontakt</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 style="margin-bottom: 3rem;">Über SAUFSHOP</h1>
+        
+        <div class="about-section">
+            <h2>Unsere Geschichte</h2>
+            <p>
+                SAUFSHOP ist Deutschlands führender Online-Weinhändler mit einer Leidenschaft für exquisite Weine 
+                aus den besten Regionen der Welt. Seit 2024 helfen wir Weinliebhabern, ihre perfekten Flaschen zu finden.
+            </p>
+            <p>
+                Unsere Mission ist einfach: Weine von höchster Qualität zu fairen Preisen direkt zu dir nach Hause bringen. 
+                Jeder Wein in unserem Sortiment wurde sorgfältig von unseren Sommeliers ausgewählt und kommt mit einer 
+                Geschichtsgarantie – wir kennen jeden Wein persönlich und können dir davon erzählen.
+            </p>
+        </div>
+        
+        <div class="about-section">
+            <h2>Warum SAUFSHOP?</h2>
+            <p>
+                <strong>⭐ Expertenwissen</strong><br/>
+                Unsere Sommeliers haben über 50 Jahre kombinierte Erfahrung in der Weinbranche. 
+                Jedes Mitglied unseres Teams ist zertifiziert und leidenschaftlich begeistert von Wein.
+            </p>
+            <p style="margin-top: 1.5rem;">
+                <strong>🌍 Global</strong><br/>
+                Weine aus über 15 Ländern und den besten Weingütern der Welt. Von Bordeaux über Burgund 
+                bis zum italienischen Piemont – wir haben für jeden Geschmack etwas.
+            </p>
+            <p style="margin-top: 1.5rem;">
+                <strong>⚡ Schnelle Lieferung</strong><br/>
+                Lieferung innerhalb von 24-72 Stunden direkt zu dir nach Hause. Wir arbeiten mit den besten 
+                Logistikpartnern zusammen, um deine Weine sicher und schnell zu liefern.
+            </p>
+            <p style="margin-top: 1.5rem;">
+                <strong>💯 Qualität über Quantität</strong><br/>
+                Wir verkaufen nicht einfach Weine – wir kuratieren eine Sammlung. Nur die besten Weine kommen 
+                in unser Sortiment. Keine Kompromisse.
+            </p>
+        </div>
+        
+        <div class="about-section">
+            <h2>Unser Team</h2>
+            <p>
+                Das SAUFSHOP-Team besteht aus leidenschaftlichen Weinliebhabern, zertifizierten Sommeliers und 
+                E-Commerce-Experten. Wir sind hier, um dir die beste Erfahrung beim Weinkauf zu bieten und dir 
+                bei der Auswahl des perfekten Weins zu helfen.
+            </p>
+            <p style="margin-top: 1rem;">
+                Ob du ein erfahrener Weinkenner bist oder gerade erst anfängst – wir sind dein Partner bei der 
+                Entdeckung neuer Lieblingsweine. Kontaktiere uns gerne mit Fragen, Empfehlungen oder einfach 
+                um über Wein zu plaudern!
+            </p>
+        </div>
+        
+        <div class="about-section">
+            <h2>Kontakt & Support</h2>
+            <p>
+                Du hast Fragen? Wir sind für dich da! Schreib uns eine <a href="contact.html" style="color: var(--gold); text-decoration: none; font-weight: 600;">Nachricht</a> 
+                oder ruf uns an. Unser Team antwortet dir innerhalb von 24 Stunden.
+            </p>
+            <p style="margin-top: 1rem;">
+                <strong>Email:</strong> info@saufshop.de<br/>
+                <strong>Telefon:</strong> +49 (0) 123 456789<br/>
+                <strong>Öffnungszeiten:</strong> Mo-Fr 9:00-18:00 Uhr
+            </p>
+        </div>
+    </div>
+
+    <script src="../assets/js/script.js"></script>
+    <script>
+        function redirectToShop() {
+            const query = document.getElementById('headerSearch').value;
+            if (query) {
+                window.location.href = 'shop.html?search=' + encodeURIComponent(query);
+            } else {
+                window.location.href = 'shop.html';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCart();
+        });
+    </script>
+</body>
+</html>
