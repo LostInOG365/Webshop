@@ -414,7 +414,7 @@ This project is provided as-is for educational purposes under the MIT License.
 
 Developed by a trainee in the Fachinformatiker/in Anwendungsentwicklung program at **GFN Karlsruhe**.
 
-**Project Supervisor:** Christoph Arnold
+Project Supervisor: GFN Trainer
 
 ---
 
